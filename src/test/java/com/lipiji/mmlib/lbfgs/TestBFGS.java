@@ -14,9 +14,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.lipiji.mllib.domain.Problem;
-import com.lipiji.mllib.lbfgs.LBFGS;
+import com.lipiji.mllib.lbfgs.BFGS;
 
-public class TestLBFGS {
+public class TestBFGS {
 	private DoubleMatrix X;
 	private DoubleMatrix Y;
 	private DoubleMatrix theta;
@@ -68,8 +68,8 @@ public class TestLBFGS {
 	public void MSE() {
 		Problem problem = new Problem(X, Y, theta);
 		MSEOptimizer lnfunc = new MSEOptimizer(problem);
-		LBFGS.train(lnfunc, 1000, 100, 0.00001).print();
+		BFGS.train(lnfunc, 1000, 0.00001).print();
 		LogisticRegressionOptimizer lrFunc = new LogisticRegressionOptimizer(problem);
-		LBFGS.train(lrFunc, 1000, 100, 0.00001).print();
+		BFGS.train(lrFunc, 1000, 0.00001).print();
 	}
 }

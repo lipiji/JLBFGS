@@ -6,28 +6,9 @@ import org.jblas.DoubleMatrix;
  * Limited-memory Broyden-Fletcher-Goldfarb-Shanno (L-BFGS)
  * 
  */
-public class LBFGS {
+public class LBFGS extends BFGS {
 
-	/*
-	 * d: The search direction
-	 * x: previous iterate
-	 * rho :- The backtrack step between (0,1) usually 1/2
-	 * c: parameter between 0 and 1 , usually 10^{-4}
-	 * http://www.cnblogs.com/kemaswill/p/3416231.html
-	 */
-	private static double backtrackLineSearch(Optimizer opt, DoubleMatrix d, double rho, double c) {
-		double lambda = 1;
-		DoubleMatrix x = opt.getProblem().getTheta();
-		int maxIter = 10000;
-		while (maxIter > 0 && (opt.getObjectValue(x.add(d.mul(lambda))) >
-			opt.getObjectValue(x) + opt.getGradient().transpose().mmul(d).mul(c * lambda).get(0))) {
-			lambda *= rho;
-			maxIter--;
-		}
-		return lambda;
-	}
-
-	public static DoubleMatrix train(Optimizer opt, int Iter, int m, double e) {
+    public static DoubleMatrix train(Optimizer opt, int Iter, int m, double e) {
 		int dim = opt.getProblem().getTheta().length;
 		DoubleMatrix s = new DoubleMatrix(dim, m);
 		DoubleMatrix y = s.dup();
@@ -42,7 +23,7 @@ public class LBFGS {
 			DoubleMatrix newx = x.add(s.getColumn(current));
 			opt.update(newx);
 			DoubleMatrix newg = opt.getGradient();
-			if (newg.norm2() < e) {
+			if (newg.sub(g).norm2() < e) {
 				return opt.getProblem().getTheta();
 			}
 			y.putColumn(current, newg.sub(g));
