@@ -63,12 +63,12 @@
         <dependency>
             <groupId>org.jblas</groupId>
             <artifactId>jblas</artifactId>
-            <version>1.2.3</version>
+            <version>1.2.4</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.3.2</version>
+            <version>3.4</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
