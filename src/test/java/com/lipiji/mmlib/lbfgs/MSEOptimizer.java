@@ -5,7 +5,7 @@ import com.lipiji.mllib.lbfgs.Optimizer;
 
 // Mean Square Loss
 public class MSEOptimizer extends Optimizer {
-	public MSEOptimizer(Problem problem) {
-		super(problem);
-	}
+    public MSEOptimizer(Problem problem) {
+        super(problem);
+    }
 }
